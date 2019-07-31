@@ -1,34 +1,34 @@
 {% extends 'blog/base.html' %}
-<div class="w3-padding-large" id="main">
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post" >
-    {% csrf_token %}
-    {% if form.errors %}
-	<!-- Error messaging -->
-	<div id="errors">
-		<div class="inner">
-			<p>There were some errors in the information you entered. Please correct the following:</p>
-			<ul>
-				{% for field in form %}
-					{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
-				{% endfor %}
-			</ul>
-		</div>
-	</div>
-	<!-- /Error messaging -->
-{% endif %}
-  <table>
-        {% for entries in form %}
-            </br>
-        {{ entries.label }}
-            </br>
-           {{ entries }}
-            </br>
-    {% endfor %}
-  </br>
-      <button class="btn btn-primary" type="submit">Sign up</button>
-    </table>
-  </form>
+    <div class="w3-padding-large " id="main">
+        <h2>Sign up</h2>
+        <form method="post" >
+            {% csrf_token %}
+            {% if form.errors %}
+                <!-- Error messaging -->
+                <div id="errors">
+                    <div class="for">
+                        <p>There were some errors in the information you entered. Please correct the following:</p>
+                        <ul>
+                            {% for field in form %}
+                                {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- /Error messaging -->
+            {% endif %}
+            <table>
+                {% for entries in form %}
+                    </br>
+                    {{ entries.label }}
+                    </br>
+                    {{ entries }}
+                    </br>
+                {% endfor %}
+                </br>
+                <button class="btn btn-primary" type="submit">Sign up</button>
+            </table>
+        </form>
     </div>
 {% endblock %}

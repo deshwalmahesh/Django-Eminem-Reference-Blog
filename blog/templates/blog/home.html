@@ -1,0 +1,82 @@
+{% include 'blog/base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <title>Home</title>
+{% endblock %}
+
+
+{% block content %}
+    <!-- Page Content -->
+    <div class="w3-padding-large" id="main">
+        <!-- Header/Home -->
+        <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+            <h1 class="w3-jumbo"><span class="w3-hide-small"></span>Marshall Mathers</h1>
+            <p>Rapper | Song-Writer | Producer | Actor | Businessman | God</p>
+            <img src="{% static 'pics/eminem.jpg' %}" alt="Eminem" class="w3-image" width=100% height=100%>
+        </header>
+
+        <!-- About Section -->
+        <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+            <h2 class="w3-text-light-grey">EMINEM</h2>
+            <hr style="width:200px" class="w3-opacity">
+            <p>TBH, If you have to read about him here for the first time, you are at a wrong place; This blog is not for you.
+                Listen to him, think deep, get mesmerised and then come here, again. We'll be happy to help you on your queries.
+                Anyways, He is everything everyone would want to be. Mother drug addict, no clue of father, poor and white guy in
+                a neighbourhood of black but with one dream-Being a rapper. Through hard work, sacrifices and perseverance, he is
+                now the most sold singer, first white rapper, lyrical genius and God to Some. IF you are new to his following,
+                just give it some time and you'll know.</p>
+
+
+            <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+                <div class="w3-quarter w3-section">
+                    <span class="w3-xlarge">15+</span><br>
+                    Albums
+                </div>
+                <div class="w3-quarter w3-section">
+                    <span class="w3-xlarge">100 Millions+</span><br>
+                    Copies Sold
+                </div>
+                <div class="w3-quarter w3-section">
+                    <span class="w3-xlarge">15</span><br>
+                    Grammy Awards
+                </div>
+                <div class="w3-quarter w3-section">
+                    <span class="w3-xlarge">1</span><br>
+                    Oscar
+                </div>
+            </div>
+
+            <div class="w3-padding-64 w3-content" id="photos">
+                <h2 class="w3-text-light-grey"><i>The Legend</i></h2>
+                <hr style="width:200px" class="w3-opacity">
+                <!-- Grid for photos -->
+                <div class="w3-row-padding" style="margin:0 -16px">
+                    <div class="w3-half">
+                        <img  style="width:100%" src={% static 'pics/2.jpg' %} >
+                        <img  style="width:100%" src={% static 'pics/3.jpg' %} >
+                    </div>
+
+                    <div class="w3-half">
+                        <img  style="width:100%" src={% static 'pics/4.jpg' %} >
+                        <img  style="width:100%" src={% static 'pics/5.jpeg' %}>
+                    </div>
+                    <!-- End photo grid -->
+                </div>
+
+
+
+                <!-- Footer -->
+                <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+                    Follow:
+                    <a class="fa fa-facebook-official w3-hover-opacity" href="https://www.facebook.com/eminem" target="_blank"></a>
+                    <a class="fa fa-instagram w3-hover-opacity"href="https://www.instagram.com/eminem" target="_blank"></a>
+                    <a class="fa fa-twitter w3-hover-opacity" href="https://www.twitter.com/eminem" target="_blank"></a>
+                    <p class="w3-medium">Designed By: <a href="https://www.instagram.com/deshwal.mahesh" target="_blank" class="w3-hover-text-green">Mahesh Deshwal</a></p>
+                    <!-- End footer -->
+                </footer>
+
+                <!-- END PAGE CONTENT -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

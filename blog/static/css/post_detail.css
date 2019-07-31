@@ -1,0 +1,19 @@
+.wrapper {
+    border:white 1px solid;
+    margin: 1px;
+    padding: 10px;
+}
+
+.comment-wrapper{
+    border: 1px solid #aaaaaa;
+    padding:10px;
+    margin: 1px;
+}
+
+.post-wrapper{
+    display: block;
+    padding:5px;
+    margin: 1px;
+    text-align: left !important;
+    width: 100%;
+}

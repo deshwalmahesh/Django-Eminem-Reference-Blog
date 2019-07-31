@@ -11,9 +11,11 @@ from django.contrib.auth.forms import UserCreationForm
 
 #____________________POSTS___________________#
 
+class Home(TemplateView):
+    template_name = 'blog/home.html'
+
 class About(TemplateView):
     template_name = 'blog/about.html'
-
 
 class PostListView(ListView):
     model = Post
