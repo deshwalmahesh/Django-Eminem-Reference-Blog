@@ -1,0 +1,44 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="w3-padding-large" id="main">
+    <div class="posttitle loader">{{ post.title }}
+    {% if post.published_date %}
+        <div class="date postdate">
+            <p>{{ post.published_date }}</P>
+     {% else %}
+        <a class="btn btn-default" href="{% url 'publish_post' pk=post.pk %}">Publish</a>
+        </div>
+    {% endif %}
+    <p class="postcontent">{{ post.text|safe|linebreaksbr }}</p>
+    {% if user.is_authenticated and user.is_staff %}
+        <a class="btn btn-primary " href="{% url 'edit_post' pk=post.pk %}">
+            <span class="glyphicon glyphicon-pencil"></span></a>
+         <a class="btn btn-primary " href="{% url 'delete_post' pk=post.pk %}">
+        <span class="glyphicon glyphicon-remove"></span></a>
+    {% endif %}
+    <hr>
+        <a class="btn btn-primary btn-comment " href="{% url 'add_comment_to_post' pk=post.pk %}"> Comment </a>
+    <div class="container">
+        {% for comment in post.comments.all %}
+            {% if user.is_authenticated or comment.approved_comment %}
+                {{ comment.created_date }}
+                {% if not comment.approved_comment and user.is_staff %}
+
+                    <a class="btn btn-default " href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="btn btn-default " href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                {% endif %}
+                <p>{{ comment.text|safe|linebreaks }}</p>
+                <p>Posted by: {{ comment.author }}</p>
+                {% if user.is_staff or user.username == comment.author %}
+                    <a class="btn btn-default " href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                    <p></p>
+                {% endif %}
+            {% endif %}
+            {% empty %}
+            <p>No comments yet!</p>
+
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+{% endblock %}

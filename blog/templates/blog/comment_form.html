@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<div class="w3-padding-large" id="main">
+<div class="empty-form">
+    <h3>New Comment</h3>
+    <form class="post-form" method="POST">
+       {{ form.as_p }}
+        {% csrf_token %}
+        <button class="save btn btn-default" type="submit" value="Post Comment">Comment</button>
+    </form>
+    <script> var editor = new MediumEditor('.editable');</script>
+</div>
+</div>
+{% endblock %}

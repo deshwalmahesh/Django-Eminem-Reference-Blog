@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<div class="w3-padding-large" id="main">
+    <div class="centerstage">
+        {% for post in post_list %}
+            <div class="post">
+                <h3 align="center"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+            </div>
+            <div class="date">
+                <h5 align="center">Published on: {{ post.published_date|date:"D M Y" }}</h5>
+            </div>
+             <h5 align="center" href="{% url 'post_detail' pk=post.pk %}">{{ post.approve_comments.count }} Comments</h5>
+                                                                <!-- .count is default-->
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

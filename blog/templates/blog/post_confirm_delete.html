@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<div class="w3-padding-large" id="main">
+<div class="form-class">
+    <form method="POST">
+        <h5>Are you sure you want to delete {{ object }}</h5>
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit" value="Confirm">Confirm</button>
+
+    </form>
+</div>
+</div>
+{% endblock %}
