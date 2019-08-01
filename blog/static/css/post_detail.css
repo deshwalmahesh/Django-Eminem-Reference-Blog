@@ -1,6 +1,5 @@
 .wrapper {
-    border:white 1px solid;
-    margin: 1px;
+    border:white 2px solid;
     padding: 10px;
 }
 
@@ -11,9 +10,15 @@
 }
 
 .post-wrapper{
-    display: block;
+    border: 2px solid white;
     padding:5px;
-    margin: 1px;
-    text-align: left !important;
-    width: 100%;
+    margin: 150px !important;
+}
+
+
+.post-wrapper h2 {
+    font-family: Roboto, sans-serif !important;
+}
+
+.post-content{
 }

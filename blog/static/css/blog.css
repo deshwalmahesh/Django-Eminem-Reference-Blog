@@ -1,36 +1,3 @@
-.techfont{
-  font-family: 'Dancing Script', sans-serif;
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.postdate{
-}
-
-.posttitle{
-  font-family: 'Dancing Script', sans-serif;
-  font-size: 3em;
-}
-
-.postcontent{
-  font-family: 'Shadows Into Light';
-  font-size: 1.5em;
-  align-content: inherit;
-}
-
-
-.btn-comment{
-  position: absolute;
-  right: 0px;
-}
-
-.bigbrand{
-  font-size: 1.5em;
-}
-
-.textareaclass{
-  border: 2px solid red;
-}
 
 /*COLOR CHANGER*/
 /*Credit and Source: http://codepen.io/thapliyalshivam/pen/dvgXVO*/

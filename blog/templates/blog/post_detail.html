@@ -7,26 +7,32 @@
     <div class="w3-padding-large" id="main">
         <div class="wrapper w3-red">
             <div class="post-wrapper w3-black loader">
-                <h2>{{ post.title }}</h2>
+                <div id="post-title"><h2 id="post-title">{{ post.title }}</h2></div>
+
                 {% if post.published_date %}
-                    <div class="date postdate">
+                    <div class="post-date">
                         <p style="font-size: 20px" align="left">{{ post.published_date }}</p>
-                {% else %}
+                    </div>
+                    {% else %}
+                    <div class="unbublished">
                         <a class="btn btn-default" href="{% url 'publish_post' pk=post.pk %}">Publish</a>
                     </div>
                 {% endif %}
-                <div class="post-wrapper"> <p>{{ post.text|safe|linebreaksbr }}</p></div>
+
+                <div class="post-content">
+                    <p>{{ post.text|safe|linebreaksbr }}</p>
+                </div>
+
                 {% if user.is_authenticated and user.is_staff %}
                     <a class="btn btn-primary " href="{% url 'edit_post' pk=post.pk %}">
                         <span class="glyphicon glyphicon-pencil"></span></a>
                     <a class="btn btn-primary " href="{% url 'delete_post' pk=post.pk %}">
                         <span class="glyphicon glyphicon-remove"></span></a>
                     <a class="btn btn-primary btn-comment " href="{% url 'add_comment_to_post' pk=post.pk %}"> Comment </a>
-                    </div>
-
                 {% endif %}
+            </div>
             <hr>
-            <div class="container">
+            <div class="comment-wrapper w3-black">
                 {% for comment in post.comments.all %}
                     {% if user.is_authenticated or comment.approved_comment %}
                         {{ comment.created_date }}
@@ -44,7 +50,6 @@
                     {% endif %}
                 {% empty %}
                     <p>No comments yet!</p>
-
                 {% endfor %}
             </div>
         </div>
