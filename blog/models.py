@@ -28,7 +28,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post=models.ForeignKey('blog.Post', related_name='comments',on_delete=models.CASCADE) #each post connected to a Post class
-    author=models.CharField(max_length=50) #person who is commenting
+    author=models.CharField(max_length=1024) #person who is commenting
     text=models.CharField(max_length=1024)
     created_date=models.DateField(default=timezone.now)
     approved_comment=models.BooleanField(default=False)

@@ -85,6 +85,7 @@ def add_comment_to_post(request,pk):
         if form.is_valid():
             comment=form.save(commit=False)  # get the values inside comment object
             comment.post=post  # Connect the comment to Post object
+            comment.author=request.user.username #passes the current user's username as comment's author
             comment.save()  # save comment into DB that is related to a particular Post via ForeignKey
             return redirect('post_detail',pk=post.pk)  # if form is valid, post the comment the comment to the Post
                                                        # and redirect user to the specific post in the blog he
