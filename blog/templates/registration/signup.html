@@ -2,7 +2,7 @@
 {% block content %}
     <div class="w3-padding-large " id="main">
         <h2>Sign up</h2>
-        <form method="post" >
+        <form method="post" class="red-font" >
             {% csrf_token %}
             {% if form.errors %}
                 <!-- Error messaging -->

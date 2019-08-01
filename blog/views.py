@@ -1,15 +1,13 @@
-from django.shortcuts import render,get_object_or_404,redirect,HttpResponseRedirect
-from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,DetailView,UpdateView,FormView)
+from django.shortcuts import render,get_object_or_404,redirect
+from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,DetailView,UpdateView)
 from django.utils import timezone
 from blog.models import Post,Comment
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse_lazy,reverse
+from django.urls import reverse_lazy
 from blog.forms import PostForm,CommentForm,SignupForm
-from django.contrib.auth.forms import UserCreationForm
 
-
-#____________________POSTS___________________#
+# ____________________POSTS___________________#
 
 class Home(TemplateView):
     template_name = 'blog/home.html'
@@ -28,34 +26,48 @@ class PostDetailView(DetailView):
     model = Post
 
 
-class CreatePostView(LoginRequiredMixin,CreateView):
+class CreatePostView(UserPassesTestMixin,CreateView):
     login_url = '/login/'  # Login is required for this view to access send them to one
     redirect_field_name = 'blog/post_detail.html'  # After Login, Just redirect them to the specific Post detail
     form_class = PostForm
     model = Post
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class PostUpdateView(LoginRequiredMixin,UpdateView):
+
+class PostUpdateView(UserPassesTestMixin,UpdateView):
     login_url = '/login/'  # Login is required for this view to access send them to one
     redirect_field_name = 'blog/post_detail.html'  # After Login, Just redirect them to the specific Post detail
     form_class = PostForm
     model = Post
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class PostDeleteView(LoginRequiredMixin,DeleteView):
+
+class PostDeleteView(UserPassesTestMixin,DeleteView):
     login_url = '/login/'  # Login is required for this view to access send them to one
     redirect_field_name = 'blog/post_detail.html'  # After Login, Just redirect them to the specific Post detail
     success_url= reverse_lazy('post_list')  # provide View name; see home page url
     model = Post
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class DraftListView(LoginRequiredMixin,ListView):
+
+class DraftListView(UserPassesTestMixin,ListView):
     login_url = '/login/'  # Login is required for this view to access send them to one
     redirect_field_name = 'blog/post_list.html'  # After Login, Just redirect them to the specific Post detail
     model= Post
 
     def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True).order_by('create_date')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    #makes the drafts page visible only to author
 
 #_____________HERE COMES THE COMMENT SECTION_____________#
 

@@ -7,15 +7,16 @@ class Post(models.Model):
     create_date=models.DateField(default=timezone.now)
     title=models.CharField(max_length=50)
     text=models.TextField()
+    is_published=models.BooleanField(default=False)
     published_date=models.DateField(blank=True,null=True) #IT can be published later but the comments_approved is not included
 
     def publish(self): #to publish at a later time
         self.published_date=timezone.now()
+        self.is_published=True
         self.save() ##WE will try to add self.published_date.save() see if it works
 
     def approve_comments(self):
         return self.comments.filter(approved_comment=True) #See last line of Comment Class. Same thing
-
 
     def get_absolute_url(self):
         return reverse('post_detail',kwargs={'pk':self.pk}) #go to a url named 'post detail' after posting the post with id given
@@ -31,9 +32,11 @@ class Comment(models.Model):
     text=models.CharField(max_length=1024)
     created_date=models.DateField(default=timezone.now)
     approved_comment=models.BooleanField(default=False)
+    is_approved=models.BooleanField(default=False)
 
     def approve(self):
         self.approved_comment=True
+        self.is_approved=True
         self.save()
 
     def get_absolute_url(self):

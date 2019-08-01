@@ -1,13 +1,15 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-<div class="w3-padding-large" id="main">
-    <h3>New Post</h3>
-    <form class="post-form " method="POST">
-        {{ form.as_p }}
-        {% csrf_token %}
-    <button class="save btn btn-default" type="submit" value="Submit">Save</button>
-    </form>
-    <script type="text/javascript"> var editor=new MediumEditor('.editable'); </script>
-    <!-- see postform in forms.py. it is a widget-->
-</div>
+    <div class="w3-padding-large" id="main">
+        <h3>New Post</h3>
+        <form class="post-form " method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button class="save btn btn-default" type="submit" value="Submit">Save</button>
+        </form>
+        <script type="text/javascript">
+            var editor=new MediumEditor('.editable',{targetBlank: true,});
+        </script>
+        <!-- see postform in forms.py. it is a widget-->
+    </div>
 {% endblock %}

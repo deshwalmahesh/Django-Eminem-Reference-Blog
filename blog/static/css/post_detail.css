@@ -1,24 +1,61 @@
+
 .wrapper {
-    border:white 2px solid;
+    border: white 2px solid;
     padding: 10px;
+    background-color: #222222;
 }
 
-.comment-wrapper{
-    border: 1px solid #aaaaaa;
-    padding:10px;
-    margin: 1px;
-}
 
 .post-wrapper{
+    display: block;
     border: 2px solid white;
-    padding:5px;
-    margin: 150px !important;
+    background-color: black;
+    padding:20px;
+    margin: 2px;
 }
 
-
-.post-wrapper h2 {
-    font-family: Roboto, sans-serif !important;
+.post-title h1{
+    color:#db1212;
+    font-family: 'Crimson Pro', serif;
+    font-style: oblique;
+    text-align: center;
+    font-variant: small-caps;
+    font-size: 40px;
 }
 
+.post-date p{
+    font-family: 'Saira Stencil One', cursive;
+    text-align: center;
+    font-variant: small-caps;
+    font-size: 16px !important;
+}
 .post-content{
+    display: block;
+    margin-top:5px;
+    padding-top: 10px;
+}
+
+.post-content a{
+    color: yellowgreen;
+}
+
+.gly{
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+
+.comment-wrapper{
+    border: 2px solid white;
+    background-color: black;
+    padding:7px;
+    margin: 2px;
+}
+
+.comments{
+
+}
+
+.commented-by{
+
 }

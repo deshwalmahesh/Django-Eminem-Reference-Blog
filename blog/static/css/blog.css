@@ -36,3 +36,7 @@
   100%{filter:hue-rotate(360deg);}
 
 }
+
+.red-font{
+  color:red !important;
+}

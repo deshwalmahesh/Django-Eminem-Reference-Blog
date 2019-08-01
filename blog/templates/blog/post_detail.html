@@ -5,17 +5,19 @@
 {% endblock %}
 {% block content %}
     <div class="w3-padding-large" id="main">
-        <div class="wrapper w3-red">
-            <div class="post-wrapper w3-black loader">
-                <div id="post-title"><h2 id="post-title">{{ post.title }}</h2></div>
+        <div class="wrapper">
+            <div class="post-wrapper">
+                <div class="post-title"><h1>{{ post.title }}</h1></div>
 
                 {% if post.published_date %}
                     <div class="post-date">
-                        <p style="font-size: 20px" align="left">{{ post.published_date }}</p>
+                        <p style="font-size: 20px" align="right">Posted on: {{ post.published_date }}</p>
                     </div>
-                    {% else %}
+                {% else %}
                     <div class="unbublished">
-                        <a class="btn btn-default" href="{% url 'publish_post' pk=post.pk %}">Publish</a>
+                        {% if user.is_superuser %}
+                            <a class="btn btn-default" href="{% url 'publish_post' pk=post.pk %}">Publish</a>
+                        {% endif %}
                     </div>
                 {% endif %}
 
@@ -24,15 +26,15 @@
                 </div>
 
                 {% if user.is_authenticated and user.is_staff %}
-                    <a class="btn btn-primary " href="{% url 'edit_post' pk=post.pk %}">
+                    <a class="btn btn-primary gly " href="{% url 'edit_post' pk=post.pk %}">
                         <span class="glyphicon glyphicon-pencil"></span></a>
-                    <a class="btn btn-primary " href="{% url 'delete_post' pk=post.pk %}">
+                    <a class="btn btn-primary gly " href="{% url 'delete_post' pk=post.pk %}">
                         <span class="glyphicon glyphicon-remove"></span></a>
-                    <a class="btn btn-primary btn-comment " href="{% url 'add_comment_to_post' pk=post.pk %}"> Comment </a>
                 {% endif %}
+                <a class="btn btn-primary btn-comment gly loader" href="{% url 'add_comment_to_post' pk=post.pk %}"> Comment </a>
             </div>
             <hr>
-            <div class="comment-wrapper w3-black">
+            <div class="comment-wrapper">
                 {% for comment in post.comments.all %}
                     {% if user.is_authenticated or comment.approved_comment %}
                         {{ comment.created_date }}
