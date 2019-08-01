@@ -28,25 +28,28 @@
                 {% if user.is_authenticated and user.is_staff %}
                     <a class="btn btn-primary gly " href="{% url 'edit_post' pk=post.pk %}">
                         <span class="glyphicon glyphicon-pencil"></span></a>
-                    <a class="btn btn-primary gly " href="{% url 'delete_post' pk=post.pk %}">
+                    <a class="btn btn-danger gly " href="{% url 'delete_post' pk=post.pk %}">
                         <span class="glyphicon glyphicon-remove"></span></a>
                 {% endif %}
-                <a class="btn btn-primary btn-comment gly loader" href="{% url 'add_comment_to_post' pk=post.pk %}"> Comment </a>
+                <a class="btn btn-primary btn-comment cmnt-btn loader" href="{% url 'add_comment_to_post' pk=post.pk %}"> Comment </a>
             </div>
             <hr>
             <div class="comment-wrapper">
+                <div class="loader"><h2>Comments</h2></div>
                 {% for comment in post.comments.all %}
                     {% if user.is_authenticated or comment.approved_comment %}
-                        {{ comment.created_date }}
                         {% if not comment.approved_comment and user.is_staff %}
 
-                            <a class="btn btn-default " href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                            <a class="btn btn-default " href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                            <a class="btn btn-default gly " href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="btn btn-default gly " href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
                         {% endif %}
-                        <p>{{ comment.text|safe|linebreaks }}</p>
-                        <p>@{{ comment.author }}</p>
+                        <div class="comment-content"><p>{{ comment.text|safe|linebreaks }}</p></div>
+                        <div class="commented-by"><p>@{{ comment.author }}</p></div>
+                        <div class="commented-on"><p>{{ comment.created_date }}</p></div>
                         {% if user.is_staff or user.username == comment.author %}
-                            <a class="btn btn-default " href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="btn btn-danger gly " href="{% url 'comment_remove' pk=comment.pk %}">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
                             <p></p>
                         {% endif %}
                     {% endif %}

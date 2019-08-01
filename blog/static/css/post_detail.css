@@ -45,17 +45,53 @@
 }
 
 
+.cmnt-btn{
+    font-size: 10px;
+    margin-top: 5px;
+    margin-left: 93%;
+}
+
 .comment-wrapper{
     border: 2px solid white;
     background-color: black;
-    padding:7px;
+    padding:20px;
     margin: 2px;
 }
 
-.comments{
+.comment-wrapper h2{
+    font-family: 'Dancing Script', sans-serif;
+    color: #27c476;
+    font-variant: historical-ligatures;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-content{
 
 }
 
 .commented-by{
 
+}
+
+.commented-on{
+}
+
+.comment-content p{
+    font-family: Roboto, sans-serif;
+    font-size: 1.25em;
+
+}
+
+.commented-by p{
+    font-style: italic;
+    font-family: "Comic Sans MS";
+}
+
+.commented-on p{
+    font-size: 11px;
+}
+
+.comment-wrapper .gly{
+    margin-left: 95%;
 }

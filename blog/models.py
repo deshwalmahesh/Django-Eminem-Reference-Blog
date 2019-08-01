@@ -13,7 +13,7 @@ class Post(models.Model):
     def publish(self): #to publish at a later time
         self.published_date=timezone.now()
         self.is_published=True
-        self.save() ##WE will try to add self.published_date.save() see if it works
+        self.save() #WE will try to add self.published_date.save() see if it works
 
     def approve_comments(self):
         return self.comments.filter(approved_comment=True) #See last line of Comment Class. Same thing
