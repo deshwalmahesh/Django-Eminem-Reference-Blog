@@ -105,3 +105,13 @@
     position: relative;
     left: 30px;
 }
+
+.no-result{
+    background-color: #aaaaaa;
+    color:Green;
+    font-family: 'Libre Caslon Display', serif;
+    text-align: center;
+    margin: 50px;
+    padding: 50px;
+;
+}
