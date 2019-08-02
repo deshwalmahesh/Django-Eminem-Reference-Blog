@@ -29,7 +29,6 @@ class Comment(models.Model):
     post=models.ForeignKey('blog.Post', related_name='comments',on_delete=models.CASCADE) #each post connected to a Post class
     author=models.CharField(max_length=1024) #person who is commenting
     text=models.CharField(max_length=1024)
-    updated_text = models.CharField(max_length=1024)
     created_date=models.DateField(default=timezone.now)
     approved_comment=models.BooleanField(default=False)
     edit=models.BooleanField(default=False)
@@ -48,7 +47,7 @@ class Comment(models.Model):
 
     def update_comment(self):
         self.edit=True
-        self.text=self.updated_text
         self.edited_on=timezone.now()
         self.save()
+
 
