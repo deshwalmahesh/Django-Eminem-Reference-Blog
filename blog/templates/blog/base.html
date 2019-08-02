@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Pro|Roboto+Slab|Saira+Stencil+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Caslon+Display|Lobster|Crimson+Pro|Roboto+Slab|Saira+Stencil+One&display=swap" rel="stylesheet">
 
     <style>
         body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
@@ -53,6 +53,12 @@
         <i class="fa fa-pencil-square-o w3-xxlarge"></i>
         <p>POSTS</p>
     </a>
+    {% if user.is_superuser %}
+        <a href="{% url 'post_draft_list' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <i class="fa fa-files-o w3-xxlarge"></i>
+            <p>Drafts</p>
+        </a>
+    {% endif %}
     <a href="{% url 'about' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
         <i class="fa fa-info-circle w3-xxlarge"></i>
         <p>ABOUT</p>
@@ -66,12 +72,6 @@
         <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
             <i class="fa fa-user-o w3-xxlarge"></i>
             <p>Login</p>
-        </a>
-    {% endif %}
-    {% if user.is_superuser %}
-        <a href="{% url 'post_draft_list' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-            <i class="fa fa-files-o w3-xxlarge"></i>
-            <p>Drafts</p>
         </a>
     {% endif %}
 </nav>

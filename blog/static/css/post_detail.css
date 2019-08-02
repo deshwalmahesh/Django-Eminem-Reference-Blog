@@ -60,38 +60,48 @@
 
 .comment-wrapper h2{
     font-family: 'Dancing Script', sans-serif;
+    text-align: center;
     color: #27c476;
     font-variant: historical-ligatures;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #cccccc;
 }
 
-.comment-content{
-
+.approved-comments{
+    padding:15px;
+    margin: 20px 0px;
+    background-color: #cccccc;
+    color:black;
 }
 
-.commented-by{
-
+.approved-comments:hover{
+    background-color: #aaaaaa;
+}
+.unapproved-comments{
+    border: 2px solid red;
+    padding:5px;
+    margin:2px;
 }
 
-.commented-on{
-}
-
-.comment-content p{
-    font-family: Roboto, sans-serif;
-    font-size: 1.25em;
+.comment-text p{
+    font-size: 17px;
+    font-family: "Trebuchet MS", sans-serif;
 
 }
 
 .commented-by p{
     font-style: italic;
     font-family: "Comic Sans MS";
+    color:green;
+    font-size: 15px;
+    position:relative;
+    left:15px;
 }
 
 .commented-on p{
-    font-size: 11px;
-}
-
-.comment-wrapper .gly{
-    margin-left: 95%;
+    font-size: 10px;
+    color:red;
+    position: relative;
+    left: 30px;
 }

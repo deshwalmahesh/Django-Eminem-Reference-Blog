@@ -25,7 +25,7 @@
                     <p>{{ post.text|safe|linebreaksbr }}</p>
                 </div>
 
-                {% if user.is_authenticated and user.is_staff %}
+                {% if user.is_superuser %}
                     <a class="btn btn-primary gly " href="{% url 'edit_post' pk=post.pk %}">
                         <span class="glyphicon glyphicon-pencil"></span></a>
                     <a class="btn btn-danger gly " href="{% url 'delete_post' pk=post.pk %}">
@@ -36,26 +36,46 @@
             <hr>
             <div class="comment-wrapper">
                 <div class="loader"><h2>Comments</h2></div>
-                {% for comment in post.comments.all %}
-                    {% if user.is_authenticated or comment.approved_comment %}
-                        {% if not comment.approved_comment and user.is_staff %}
+                {% if post.comments %}
+                    {% for comment in post.comments.all %}
+                        {% if not comment.approved_comment and user.is_superuser %}
+                            <div class="unapproved-comments">
+                                <h3>Approve/Un-approve this comment</h3>
+                                <div class="comment-content"><p>{{ comment.text|safe|linebreaks }}</p></div>
+                                <div class="commented-by"><p>@{{ comment.author }}</p></div>
+                                <div class="commented-on"><p>{{ comment.created_date }}</p></div>
 
-                            <a class="btn btn-default gly " href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                            <a class="btn btn-default gly " href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                                <a class="btn btn-default gly " href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a class="btn btn-default gly " href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                            </div>
                         {% endif %}
-                        <div class="comment-content"><p>{{ comment.text|safe|linebreaks }}</p></div>
-                        <div class="commented-by"><p>@{{ comment.author }}</p></div>
-                        <div class="commented-on"><p>{{ comment.created_date }}</p></div>
-                        {% if user.is_staff or user.username == comment.author %}
-                            <a class="btn btn-danger gly " href="{% url 'comment_remove' pk=comment.pk %}">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-                            <p></p>
+
+                        {% if comment.approved_comment %}
+
+                            <div class="approved-comments">
+
+                                <div class="comment-text"><p>{{ comment.text|safe|linebreaks }}</p></div>
+                                <div class="commented-by"><p>@{{ comment.author }}</p></div>
+                                <div class="commented-on"><p>- {{ comment.created_date }}</p></div>
+
+                                {% if user.is_superuser or user.username == comment.author %}
+                                    <a class="btn btn-danger gly " href="{% url 'comment_remove' pk=comment.pk %}">
+                                        <span title="Remove" class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if user.username == comment.author %}
+                                    <a class="btn btn-primary gly " href="{% url 'comment_update' pk=comment.pk %}">
+                                        <span title="Edit" class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                {% endif %}
+                                <p></p>
+                            </div>
                         {% endif %}
-                    {% endif %}
-                {% empty %}
+                    {% endfor %}
+                {% else %}
                     <p>No comments yet!</p>
-                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

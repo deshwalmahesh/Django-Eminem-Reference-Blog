@@ -87,21 +87,28 @@ def add_comment_to_post(request,pk):
             comment.post=post  # Connect the comment to Post object
             comment.author=request.user.username #passes the current user's username as comment's author
             comment.save()  # save comment into DB that is related to a particular Post via ForeignKey
-            return redirect('post_detail',pk=post.pk)  # if form is valid, post the comment the comment to the Post
-                                                       # and redirect user to the specific post in the blog he
-                                                       # commented on. 'post_detail' is URL name
-
+            return redirect('post_detail',pk=post.pk)
+            # if form is valid, post the comment the comment to the Post and redirect user to the specific post in
+            # the blog he commented on. 'post_detail' is URL name
     else:
         form=CommentForm()  # if method!=Post, present a form to fill i.e comment page
-
     return render(request,'blog/comment_form.html',{'form':form})  # render actual page to display in any case
 
 @login_required
-def comment_approve(request,pk):
-    comment=get_object_or_404(Comment,pk=pk)
-    comment.approve()  # See the models file. It is a function defined there to set the value to true
-    return redirect('post_detail',pk=comment.post.pk)  # it is the URL not template/HTML page
-                                                       # comment is related to a post which has a pk
+def comment_update(request,pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method=='POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            text=form.cleaned_data['text']
+            comment.text=text
+            comment.approved_comment=False
+            comment.update_comment()
+            post_pk=comment.post.pk
+            return redirect('post_detail',pk=post_pk)
+    else:
+        form=CommentForm()
+    return render(request,'blog/comment_form.html',{'form':form})
 
 @login_required  #add ne feature that it can be deleted by either the owner of blog or the actual commentator
 def comment_remove(request,pk):
@@ -109,6 +116,14 @@ def comment_remove(request,pk):
     post_pk=comment.post.pk  #after deletion it'll go using this pk because comment will be deleted so no <pk>
     comment.delete()  # delete from DB. Defined in models
     return redirect('post_detail',pk=post_pk)
+
+
+@login_required
+def comment_approve(request,pk):
+    comment=get_object_or_404(Comment,pk=pk)
+    comment.approve()  # See the models file. It is a function defined there to set the value to true
+    return redirect('post_detail',pk=comment.post.pk)  # it is the URL not template/HTML page
+                                                       # comment is related to a post which has a pk
 
 @login_required
 def post_publish(request,pk):

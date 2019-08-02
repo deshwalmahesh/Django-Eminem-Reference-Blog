@@ -7,7 +7,6 @@ class Post(models.Model):
     create_date=models.DateField(default=timezone.now)
     title=models.CharField(max_length=50)
     text=models.TextField()
-    is_published=models.BooleanField(default=False)
     published_date=models.DateField(blank=True,null=True) #IT can be published later but the comments_approved is not included
 
     def publish(self): #to publish at a later time
@@ -30,9 +29,11 @@ class Comment(models.Model):
     post=models.ForeignKey('blog.Post', related_name='comments',on_delete=models.CASCADE) #each post connected to a Post class
     author=models.CharField(max_length=1024) #person who is commenting
     text=models.CharField(max_length=1024)
+    updated_text = models.CharField(max_length=1024)
     created_date=models.DateField(default=timezone.now)
     approved_comment=models.BooleanField(default=False)
-    is_approved=models.BooleanField(default=False)
+    edit=models.BooleanField(default=False)
+    edited_on=models.DateTimeField(blank=True,null=True)
 
     def approve(self):
         self.approved_comment=True
@@ -44,4 +45,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+    def update_comment(self):
+        self.edit=True
+        self.text=self.updated_text
+        self.edited_on=timezone.now()
+        self.save()
 
