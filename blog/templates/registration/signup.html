@@ -1,8 +1,9 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    <div class="w3-padding-large " id="main">
+    {% load bootstrap4 %}
+    <div class="container w3-padding-large" id="main">
         <h2>Sign up</h2>
-        <form method="post" class="red-font" >
+        <form method="POST"   >
             {% csrf_token %}
             {% if form.errors %}
                 <!-- Error messaging -->
@@ -19,14 +20,7 @@
                 <!-- /Error messaging -->
             {% endif %}
             <table>
-                {% for entries in form %}
-                    </br>
-                    {{ entries.label }}
-                    </br>
-                    {{ entries }}
-                    </br>
-                {% endfor %}
-                </br>
+                {% bootstrap_form form %}
                 <button class="btn btn-primary" type="submit">Sign up</button>
             </table>
         </form>

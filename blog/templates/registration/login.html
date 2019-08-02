@@ -13,7 +13,9 @@
             <input type="submit" class="btn btn-primary " value="Login">
             <input type="hidden" name="next" value="{{ next }}">
         </form>
+    </br>
+    </br>
         <h4>New Here?</h4>
-        <p><a href="{% url 'signup' %}"}>Signup</a></p>
+        <a class="btn btn-success btn-sm" href="{% url 'signup' %}"}>Signup</a>
     </div>
 {% endblock %}
