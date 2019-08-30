@@ -125,6 +125,12 @@ def comment_approve(request,pk):
     return redirect('post_detail',pk=comment.post.pk)  # it is the URL not template/HTML page
                                                        # comment is related to a post which has a pk
 
+def comment_approve_edit(request,pk):
+    comment=get_object_or_404(Comment,pk=pk)
+    comment.approve_edit()  # See the models file. It is a function defined there to set the value to true
+    return redirect('post_detail',pk=comment.post.pk)  # it is the URL not template/HTML page
+                                                       # comment is related to a post which has a pk
+
 @login_required
 def post_publish(request,pk):
     post=get_object_or_404(Post,pk=pk)
