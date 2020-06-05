@@ -1,5 +1,5 @@
 bootstrap4==0.1.0
-Django==2.2.4
+Django==2.2.13
 django-adminlte2==0.4.1
 django-bootstrap4==0.0.8
 psycopg2==2.8.3
